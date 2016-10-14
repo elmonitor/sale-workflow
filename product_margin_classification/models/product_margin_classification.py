@@ -21,43 +21,43 @@ class ProductMarginClassification(models.Model):
         return self.env['res.company'].browse(self.env.user._get_company())
 
     # Column Section
-    name = fields.Char(string='Name', required=True)
+    name = fields.Char(string='Nombre', required=True)
 
-    margin = fields.Float(string='Margin', required=True)
+    margin = fields.Float(string='Margen', required=True)
 
     company_id = fields.Many2one(
-        comodel_name='res.company', string='Company',
+        comodel_name='res.company', string='Compañía',
         default=_default_company_id)
 
     template_ids = fields.One2many(
-        string='Products', comodel_name='product.template',
+        string='Productos', comodel_name='product.template',
         inverse_name='margin_classification_id', readonly=True)
 
     template_qty = fields.Integer(
-        string='Products Quantity', compute='_compute_template_qty',
+        string='Cantidad', compute='_compute_template_qty',
         store=True)
 
     template_different_price_qty = fields.Integer(
-        string='Products With Different Price', multi='differente_price',
+        string='Productos con dif de precio', multi='differente_price',
         store=True, compute='_compute_template_different_price_qty')
 
     template_cheap_qty = fields.Integer(
-        string='Products Cheaper', multi='differente_price',
+        string='Productos muy baratos', multi='differente_price',
         store=True, compute='_compute_template_different_price_qty')
 
     template_expensive_qty = fields.Integer(
-        string='Products Too Expensive', multi='differente_price',
+        string='Products muy caros', multi='differente_price',
         store=True, compute='_compute_template_different_price_qty')
 
     price_round = fields.Float(
-        string='Price Rounding',
+        string='Redondeo',
         digits_compute=dp.get_precision('Product Price'),
         help="Sets the price so that it is a multiple of this value.\n"
         "Rounding is applied after the margin and before the surcharge.\n"
         "To have prices that end in 9.99, set rounding 10, surcharge -0.01")
 
     price_surcharge = fields.Float(
-        string='Price Surcharge',
+        string='Ajuste de redondeo',
         digits_compute=dp.get_precision('Product Price'),
         help="Specify the fixed amount to add or substract(if negative) to"
         " the amount calculated with the discount.")
