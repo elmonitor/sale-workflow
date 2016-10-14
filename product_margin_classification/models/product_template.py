@@ -60,7 +60,7 @@ class ProductTemplate(models.Model):
                     template.standard_price /(multi),
                     precision_rounding=classification.price_round) +\
                     classification.price_surcharge
-                    template.list_price=template.theoretical_price
+                template.list_price=template.theoretical_price
             else:
                 template.theoretical_price = template.list_price
             difference = (template.list_price - template.theoretical_price)
