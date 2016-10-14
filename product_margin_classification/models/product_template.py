@@ -11,28 +11,28 @@ class ProductTemplate(models.Model):
     _inherit = 'product.template'
 
     MARGIN_STATE_SELECTION = [
-        ('ok', 'Correct Margin'),
-        ('cheap', 'Cheaper'),
-        ('expensive', 'Too Expensive'),
+        ('ok', 'Margen correcto'),
+        ('cheap', 'Muy barato'),
+        ('expensive', 'Muy caro'),
     ]
 
     # Columns Section
     margin_classification_id = fields.Many2one(
         comodel_name='product.margin.classification',
-        string='Margin Classification')
+        string='Tipo de Margen')
 
     theoretical_price = fields.Float(
-        string='Theoretical Price', store=True,
+        string='Precio teórico', store=True,
         digits=dp.get_precision('Product Price'),
         compute='_compute_theoretical_multi', multi='theoretical_multi')
 
     theoretical_difference = fields.Float(
-        string='Theoretical Difference', store=True,
+        string='Diferencia teórica', store=True,
         digits=dp.get_precision('Product Price'),
         compute='_compute_theoretical_multi', multi='theoretical_multi')
 
     margin_state = fields.Selection(
-        string='Theoretical Price State', store=True,
+        string='Estado del precio teórico', store=True,
         selection=MARGIN_STATE_SELECTION,
         compute='_compute_theoretical_multi', multi='theoretical_multi')
 
