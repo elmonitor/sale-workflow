@@ -57,7 +57,7 @@ class ProductTemplate(models.Model):
 #                            tax.name, template.name))
 #                    multi *= 1 + (tax.amount / 100)
                 template.theoretical_price = tools.float_round(
-                    template.standard_price * multi,
+                    template.standard_price /(1- multi),
                     precision_rounding=classification.price_round) +\
                     classification.price_surcharge
             else:
