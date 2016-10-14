@@ -6,7 +6,7 @@
             <field name="name">sale.margin.view.form</field>
             <field name='inherit_id' ref='sale.view_order_form'/>
             <field name='arch' type='xml'>
-                <xpath expr="//field[@name='order_line']/form//field[@name='price_unit']" position="after">
+                <xpath expr="//field[@name='price_unit']" position="after">
                     <field name="margin" />
                 </xpath>
             </field>
