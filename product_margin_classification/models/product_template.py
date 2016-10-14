@@ -47,7 +47,7 @@ class ProductTemplate(models.Model):
         for template in self:
             classification = template.margin_classification_id
             if classification:
-                multi = 1 + (classification.margin / 100)
+                multi = (classification.margin / 100)
 #                for tax in template.taxes_id:
 #                    if tax.amount_type != 'percent' or not tax.price_include:
 #                        raise exceptions.UserError(_(
@@ -57,7 +57,7 @@ class ProductTemplate(models.Model):
 #                            tax.name, template.name))
 #                    multi *= 1 + (tax.amount / 100)
                 template.theoretical_price = tools.float_round(
-                    template.standard_price /(1- multi),
+                    template.standard_price /(1-multi),
                     precision_rounding=classification.price_round) +\
                     classification.price_surcharge
             else:
