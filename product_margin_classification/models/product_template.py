@@ -48,14 +48,14 @@ class ProductTemplate(models.Model):
             classification = template.margin_classification_id
             if classification:
                 multi = 1 + (classification.margin / 100)
-                for tax in template.taxes_id:
-                    if tax.amount_type != 'percent' or not tax.price_include:
-                        raise exceptions.UserError(_(
-                            "Unimplemented Feature\n"
-                            "The Tax %s is not correctly set for computing"
-                            " prices with coefficients for the product %s") % (
-                            tax.name, template.name))
-                    multi *= 1 + (tax.amount / 100)
+#                for tax in template.taxes_id:
+#                    if tax.amount_type != 'percent' or not tax.price_include:
+#                        raise exceptions.UserError(_(
+#                            "Unimplemented Feature\n"
+#                            "The Tax %s is not correctly set for computing"
+#                            " prices with coefficients for the product %s") % (
+#                            tax.name, template.name))
+#                    multi *= 1 + (tax.amount / 100)
                 template.theoretical_price = tools.float_round(
                     template.standard_price * multi,
                     precision_rounding=classification.price_round) +\
